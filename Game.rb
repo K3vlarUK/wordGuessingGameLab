@@ -16,11 +16,11 @@ class Game
     @guessed_letters.length()
   end
 
-  def guess_letter(letter, hidden_word, player)
-    if hidden_word.letter_exists(letter)
-      hidden_word.reveal_letter(letter)
+  def guess_letter(letter)
+    if @hidden_word.letter_exists(letter)
+      @hidden_word.reveal_letter(letter)
     else
-      player.lose_life()
+      @player.lose_life()
     end
     @guessed_letters.push(letter.downcase())
   end

@@ -26,14 +26,14 @@ class GameTest < MiniTest::Test
   end
 
   def test_guess_letter()
-    @game.guess_letter("e", @hidden_word, @player1)
-    @game.guess_letter("F", @hidden_word, @player1)
+    @game.guess_letter("e")
+    @game.guess_letter("F")
     assert_equal(2, @game.check_guessed_letters())
     assert_equal(["e", "f"], @game.guessed_letters())
   end
 
   def test_incorrect_guess()
-    @game.guess_letter("z", @hidden_word, @player1)
+    @game.guess_letter("z")
     assert_equal(5, @player1.lives())
     assert_equal(["z"], @game.guessed_letters())
   end

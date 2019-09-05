@@ -14,12 +14,11 @@ class HiddenWordTest < MiniTest::Test
   end
 
   def test_hidden_word_has_word()
-    assert_equal("wheel of fortune", @hidden_word.get_word())
+    assert_equal("wheel of fortune", @hidden_word.get_hidden_word())
   end
 
-  def test_word_is_obscured()
-    test = @hidden_word.obscure_word()
-    assert_equal("***** ** *******", test)
+  def test_display_word_is_hidden()
+    assert_equal("***** ** *******", @hidden_word.display_word())
   end
 
   def test_guessed_letter_exists__true()
@@ -30,9 +29,12 @@ class HiddenWordTest < MiniTest::Test
     assert_equal(false, @hidden_word.letter_exists("z"))
   end
 
-  def test_correct_guess_reveal_letter()
-    @hidden_word.obscure_word()
-    assert_equal("**ee* ** ******e", @hidden_word.reveal_letter("e"))
-  end
+  # def test_correct_guess_reveal_letter()
+  #   @hidden_word.obscure_word()
+  #   @game.guess_letter("e")
+  #   @game.guess_letter("f")
+  #   @game.guess_letter("z")
+  #   assert_equal("**ee* ** ******e", @hidden_word.display_word())
+  # end
 
 end

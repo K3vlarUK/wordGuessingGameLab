@@ -21,21 +21,40 @@ class GameTest < MiniTest::Test
     assert_equal(@hidden_word, @game.show_hidden_word())
   end
 
-  def test_game_has_guess_letters()
+  def test_game_has_guess_letters__empty()
     assert_equal(0, @game.check_guessed_letters())
   end
 
-  def test_guess_letter()
-    @game.guess_letter("e")
-    @game.guess_letter("F")
+  def test_game_has_guess_letters__letters()
+    @game.guess_letter('w')
+    @game.guess_letter('e')
     assert_equal(2, @game.check_guessed_letters())
-    assert_equal(["e", "f"], @game.guessed_letters())
+  end
+
+  def test_correct_guesses()
+    @game.guess_letter('w')
+    @game.guess_letter('h')
+    @game.guess_letter('e')
+    @game.guess_letter('l')
+    assert_equal(false, @game.is_won)
+    @game.guess_letter('o')
+    @game.guess_letter('f')
+    @game.guess_letter('r')
+    @game.guess_letter('t')
+    @game.guess_letter('u')
+    @game.guess_letter('n')
+    assert_equal(true, @game.is_won)
   end
 
   def test_incorrect_guess()
     @game.guess_letter("z")
-    assert_equal(5, @player1.lives())
-    assert_equal(["z"], @game.guessed_letters())
+    @game.guess_letter("y")
+    @game.guess_letter("5")
+    @game.guess_letter("d")
+    @game.guess_letter("g")
+    assert_equal(false, @game.is_lost())
+    @game.guess_letter("b")
+    assert_equal(true, @game.is_lost())
   end
 
 end

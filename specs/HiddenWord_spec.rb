@@ -1,13 +1,16 @@
 require("minitest/autorun")
 require("minitest/pride")
 require_relative("../HiddenWord.rb")
+require_relative("../Player.rb")
+require_relative("../Game.rb")
 
 class HiddenWordTest < MiniTest::Test
 
   def setup
-
+    @player1 = Player.new("Kevin")
     @hidden_word = HiddenWord.new("wheel of fortune")
 
+    @game = Game.new(@player1, @hidden_word)
   end
 
   def test_hidden_word_has_word()
@@ -28,6 +31,7 @@ class HiddenWordTest < MiniTest::Test
   end
 
   def test_correct_guess_reveal_letter()
+    @hidden_word.obscure_word()
     assert_equal("**ee* ** ******e", @hidden_word.reveal_letter("e"))
   end
 

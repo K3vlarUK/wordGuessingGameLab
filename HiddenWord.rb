@@ -1,19 +1,21 @@
 class HiddenWord
 
   def initialize(word)
-    @word = word
+    @hidden_word = word
+    @display_word = ""
   end
 
   def get_word()
-    return @word
+    return @hidden_word
   end
 
   def obscure_word()
-    @word.tr("^ ", "*") # frm_str > to_str - From Stk Ovrflw
+    @display_word = @hidden_word
+    @display_word.tr("^ ", "*") # frm_str > to_str - From Stk Ovrflw
   end
 
   def letter_exists(guessed_letter)
-    if @word.include?(guessed_letter.downcase())
+    if @hidden_word.include?(guessed_letter.downcase())
       return true
     else
       return false
@@ -22,9 +24,9 @@ class HiddenWord
 
   def reveal_letter(guessed_letter)
     if letter_exists(guessed_letter)
-      @word.tr!("^ #{guessed_letter}", "*")
+      @display_word.tr!("^ #{guessed_letter}", "*")
     else
-      return "Incorrect Guess"
+      return nil
     end
   end
 
